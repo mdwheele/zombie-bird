@@ -2,14 +2,17 @@ package com.mdwheele.Helpers;
 
 import com.badlogic.gdx.InputProcessor;
 import com.mdwheele.GameObjects.Bird;
+import com.mdwheele.GameWorld.GameWorld;
 
 public class InputHandler implements InputProcessor
 {
     private Bird bird;
+    private GameWorld world;
 
-    public InputHandler(Bird bird)
+    public InputHandler(GameWorld world)
     {
-        this.bird = bird;
+        this.world = world;
+        this.bird = world.getBird();
     }
 
     @Override
@@ -33,7 +36,17 @@ public class InputHandler implements InputProcessor
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
+        if (world.isReady()) {
+            world.start();
+        }
+
         bird.onClick();
+
+        if (world.isGameOver()) {
+            // Reset all variables, go to GameState.READ
+            world.restart();
+        }
+
         return true;
     }
 

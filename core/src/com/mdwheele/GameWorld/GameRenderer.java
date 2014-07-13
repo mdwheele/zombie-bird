@@ -1,6 +1,7 @@
 package com.mdwheele.GameWorld;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -127,7 +128,29 @@ public class GameRenderer
                     1, 1, bird.getRotation());
         }
 
-        // End SpriteBatch
+        if (world.isReady()) {
+            AssetLoader.shadow.draw(batch, "Touch me", (136 / 2) - (42), 76);
+            AssetLoader.font.draw(batch, "Touch me", (136 / 2) - (42 - 1), 75);
+        } else {
+            if (world.isGameOver()) {
+                AssetLoader.shadow.draw(batch, "Game Over", 25, 56);
+                AssetLoader.font.draw(batch, "Game Over", 24, 55);
+
+                AssetLoader.shadow.draw(batch, "Try again?", 23, 76);
+                AssetLoader.font.draw(batch, "Try again?", 24, 75);
+            }
+
+            // Convert integer into String
+            String score = world.getScore() + "";
+
+            // Draw shadow first
+            AssetLoader.shadow.draw(batch, "" + world.getScore(), (136 / 2)
+                    - (3 * score.length()), 12);
+            // Draw text
+            AssetLoader.font.draw(batch, "" + world.getScore(), (136 / 2)
+                    - (3 * score.length() - 1), 11);
+        }
+
         batch.end();
     }
 
@@ -176,5 +199,6 @@ public class GameRenderer
                 pipe3.getHeight());
         batch.draw(bar, pipe3.getX(), pipe3.getY() + pipe3.getHeight() + 45,
                 pipe3.getWidth(), midPointY + 66 - (pipe3.getHeight() + 45));
+
     }
 }

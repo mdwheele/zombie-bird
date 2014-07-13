@@ -1,8 +1,10 @@
 package com.mdwheele.Helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AssetLoader
@@ -14,6 +16,10 @@ public class AssetLoader
     public static TextureRegion bird, birdDown, birdUp;
 
     public static TextureRegion skullUp, skullDown, bar;
+
+    public static Sound dead, flap, coin;
+
+    public static BitmapFont font, shadow;
 
     public static void load()
     {
@@ -46,11 +52,24 @@ public class AssetLoader
 
         bar = new TextureRegion(texture, 136, 16, 22, 3);
         bar.flip(false, true);
+
+        dead = Gdx.audio.newSound(Gdx.files.internal("dead.wav"));
+        flap = Gdx.audio.newSound(Gdx.files.internal("flap.wav"));
+        coin = Gdx.audio.newSound(Gdx.files.internal("coin.wav"));
+
+        font = new BitmapFont(Gdx.files.internal("fonts/text.fnt"));
+        font.setScale(.25f, -.25f);
+
+        shadow = new BitmapFont(Gdx.files.internal("fonts/shadow.fnt"));
+        shadow.setScale(.25f, -.25f);
     }
 
     public static void dispose()
     {
         // We must dispose of the texture when we are finished.
         texture.dispose();
+        dead.dispose();
+        flap.dispose();
+        coin.dispose();
     }
 }
