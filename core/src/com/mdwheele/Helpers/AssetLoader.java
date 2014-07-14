@@ -1,6 +1,7 @@
 package com.mdwheele.Helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -18,6 +19,8 @@ public class AssetLoader
     public static TextureRegion skullUp, skullDown, bar;
 
     public static Sound dead, flap, coin;
+
+    public static Music music;
 
     public static BitmapFont font, shadow;
 
@@ -57,6 +60,8 @@ public class AssetLoader
         flap = Gdx.audio.newSound(Gdx.files.internal("flap.wav"));
         coin = Gdx.audio.newSound(Gdx.files.internal("coin.wav"));
 
+        music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+
         font = new BitmapFont(Gdx.files.internal("fonts/text.fnt"));
         font.setScale(.25f, -.25f);
 
@@ -71,5 +76,6 @@ public class AssetLoader
         dead.dispose();
         flap.dispose();
         coin.dispose();
+        music.dispose();
     }
 }

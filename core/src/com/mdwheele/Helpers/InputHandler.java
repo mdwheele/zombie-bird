@@ -18,7 +18,18 @@ public class InputHandler implements InputProcessor
     @Override
     public boolean keyDown(int keycode)
     {
-        return false;
+        if (world.isReady()) {
+            world.start();
+        }
+
+        bird.onClick();
+
+        if (world.isGameOver()) {
+            // Reset all variables, go to GameState.READ
+            world.restart();
+        }
+
+        return true;
     }
 
     @Override

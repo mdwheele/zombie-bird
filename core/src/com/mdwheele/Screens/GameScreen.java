@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.mdwheele.GameWorld.GameRenderer;
 import com.mdwheele.GameWorld.GameWorld;
+import com.mdwheele.Helpers.AssetLoader;
 import com.mdwheele.Helpers.InputHandler;
 
 public class GameScreen implements Screen
@@ -23,6 +24,9 @@ public class GameScreen implements Screen
 
         world = new GameWorld(midPointY);
         renderer = new GameRenderer(world, (int) gameHeight, midPointY);
+
+        AssetLoader.music.setVolume(0.1f);
+        AssetLoader.music.play();
 
         Gdx.input.setInputProcessor(new InputHandler(world));
     }

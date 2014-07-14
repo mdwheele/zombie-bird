@@ -39,7 +39,7 @@ public class GameWorld
             case RUNNING:
                 updateRunning(delta);
                 break;
-            
+
             default:
                 break;
         }
